@@ -1,0 +1,7 @@
+# ide
+.vs
+.history
+
+# artifacts
+build
+coverage
