@@ -1,5 +1,11 @@
 {
   "singleQuote": true,
-  "trailingComma": "none",
-  "endOfLine": "auto"
+  "overrides": [
+      {
+          "files": "*.less",
+          "options": {
+              "singleQuote": false
+          }
+      }
+  ]
 }

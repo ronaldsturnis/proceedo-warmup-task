@@ -3,6 +3,7 @@
   "ignorePatterns": [
     "projects/**/*"
   ],
+  "plugins": ["ban", "deprecation"],
   "overrides": [
     {
       "files": [
@@ -10,29 +11,255 @@
       ],
       "parserOptions": {
         "project": [
-          "tsconfig.json"
+          "tsconfig.json",
+          "e2e/tsconfig.json"
         ],
         "createDefaultProgram": true
       },
       "extends": [
         "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/ng-cli-compat",
+        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
-        "@angular-eslint/directive-selector": [
-          "error",
+        "@typescript-eslint/dot-notation": "off",
+        "@typescript-eslint/explicit-member-accessibility": [
+          "off",
           {
-            "type": "attribute",
-            "prefix": "app",
-            "style": "camelCase"
+            "accessibility": "explicit"
           }
         ],
+        "@typescript-eslint/no-unused-expressions": [
+          "error",
+          {
+            "allowShortCircuit": true,
+            "allowTernary": true
+          }
+        ],
+        "comma-dangle": "error",
+        "id-blacklist": "off",
+        "id-match": "off",
+        "no-underscore-dangle": "off",
+        "ban/ban": [
+          "error",
+          { "name": "fit", "message": "don't leave focused specs" },
+          { "name": "fdescribe", "message": "don't leave focused spec groups" },
+          { "name": "xit", "message": "don't leave excluded specs" },
+          { "name": "xdescribe", "message": "don't leave excluded spec groups" }
+        ],
+        "no-restricted-imports": [
+          "error", 
+          { 
+            "paths": [
+              "rxjs/Rx", 
+              "ngx-bootstrap/modal/public_api",
+              {
+                "name": "ngx-bootstrap/modal",
+                "importNames": ["BsModalService"]
+              }
+            ] 
+          }
+        ],
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": "class",
+            "format": ["PascalCase"]
+          },
+          {
+            "selector": "interface",
+            "format": ["PascalCase"]
+          },
+          {
+            "selector": "enumMember",
+            "format": ["PascalCase", "UPPER_CASE"]
+          }
+        ],
+        "jsdoc/newline-after-description": "off",
+        "jsdoc/check-alignment": "off",
+        "arrow-body-style": "off",
+        "prefer-arrow/prefer-arrow-functions": "off",
+        "quote-props": "off",
+        "arrow-spacing": "error",
+        "spaced-comment": ["error", "always", { "exceptions": ["*"] }],
+        "eol-last": "error",
+        "for-direction": "error",
+        "guard-for-in": "error",
+        "comma-spacing": ["error", { "before": false, "after": true }],
+        "no-multi-spaces": ["error", { "ignoreEOLComments": true }],
+        "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
+        "indent": [
+          "error",
+          2, 
+          { 
+            "SwitchCase": 1,
+            "VariableDeclarator": "first",
+            "ObjectExpression": "first",
+            "FunctionDeclaration": { "parameters": "first" },
+            "FunctionExpression": { "parameters": "off" }, 
+            "ImportDeclaration": "off"
+          }
+        ],
+        "@typescript-eslint/member-delimiter-style": [
+          "error",
+          {
+            "multiline": {
+              "delimiter": "semi",
+              "requireLast": true
+            },
+            "singleline": {
+              "delimiter": "comma",
+              "requireLast": false
+            },
+            "multilineDetection": "last-member"
+          }
+        ],
+        "@typescript-eslint/member-ordering": [
+          "error",
+          {
+            "classes": [
+                "public-static-field",
+                "protected-static-field",
+                "private-static-field",
+                
+                "decorated-field",
+
+                "protected-instance-field",
+                "private-instance-field",
+                
+                "public-abstract-field",
+                "protected-abstract-field",
+                "private-abstract-field",
+
+                "constructor",
+
+                "public-static-get",
+                "public-instance-get",
+                "public-abstract-get",
+
+                "public-static-method",
+                "public-instance-method",
+                "public-abstract-method",
+
+                "protected-static-get",
+                "protected-instance-get",
+                "protected-abstract-get",
+
+                "protected-static-method",
+                "protected-instance-method",
+                "protected-abstract-method",
+
+                "private-static-get",
+                "private-instance-get",
+                "private-abstract-get",
+
+                "private-static-method",
+                "private-instance-method",
+                "private-abstract-method"
+              ]
+          }
+        ],
+        "@typescript-eslint/consistent-type-definitions": "off",
+        "@typescript-eslint/ban-types": "off",
+        "@typescript-eslint/type-annotation-spacing": "error",
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": [
+          "error",
+          {
+            "ignoreTypeValueShadow": true
+          }
+        ],
+        "object-shorthand": "off",
+        "one-var": "off",
+        "max-len": "error",
+        "brace-style": [
+          "error",
+          "1tbs", 
+          { 
+            "allowSingleLine": true 
+          }
+        ],
+        "deprecation/deprecation": "warn",
+        "object-curly-spacing": [
+          "error",
+          "always",
+          { 
+            "arraysInObjects": true,
+            "objectsInObjects": true 
+          }
+        ],
+        "no-labels": "error",
+        "no-caller": "error",
+        "no-bitwise": "error",
+        "no-console": [
+          "error", 
+          {
+            "allow": ["error"]
+          }
+        ],
+        "no-new-wrappers": "error",
+        "no-debugger": "error",
+        "no-empty": "error",
+        "no-eval": "error",
+        "@typescript-eslint/no-empty-interface": "error",
+        "@typescript-eslint/no-inferrable-types": [
+          "error",
+          { 
+            "ignoreParameters": true 
+          }
+        ],
+        "@typescript-eslint/no-misused-new": "error",
+        "@typescript-eslint/no-non-null-assertion": "error",
+        "jsdoc/no-types": "error",
+        "no-throw-literal": "error",
+        "no-fallthrough": "error",
+        "no-trailing-spaces": "error",
+        "no-undef-init": "error",
+        "no-var": "error",
+        "curly": "error",
+        "prefer-const": "error",
+        "radix": "error",
+        "no-whitespace-before-property": "error",
+        "no-irregular-whitespace": "error",
+        "@typescript-eslint/unified-signatures": "error",
+        "@typescript-eslint/explicit-function-return-type": [
+          "error",
+          {
+            "allowExpressions": true
+          }
+        ],
+        "@typescript-eslint/typedef": [
+          "error",
+          {
+            "parameter": true
+          }
+        ],
+        "@angular-eslint/no-output-native": "off",
+        "@angular-eslint/no-output-on-prefix": "error",
+        "@angular-eslint/no-inputs-metadata-property": "error",
+        "@angular-eslint/no-outputs-metadata-property": "error",
+        "@angular-eslint/no-host-metadata-property": "error",
+        "@angular-eslint/no-input-rename": "error",
+        "@angular-eslint/no-output-rename": "error",
+        "@angular-eslint/use-lifecycle-interface": "error",
+        "@angular-eslint/use-pipe-transform-interface": "error",
+        "@angular-eslint/component-class-suffix": "error",
+        "@angular-eslint/directive-class-suffix": "error",
         "@angular-eslint/component-selector": [
           "error",
           {
             "type": "element",
-            "prefix": "app",
+            "prefix": "pr-admin",
             "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "prAdmin",
+            "style": "camelCase"
           }
         ]
       }
@@ -44,7 +271,9 @@
       "extends": [
         "plugin:@angular-eslint/template/recommended"
       ],
-      "rules": {}
+      "rules": {
+        "@angular-eslint/template/no-negated-async": "off"
+      }
     }
   ]
 }
