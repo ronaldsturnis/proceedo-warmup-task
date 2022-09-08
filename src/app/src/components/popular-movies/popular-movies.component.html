@@ -1,1 +1,7 @@
-<p>popular-movies works!</p>
+<p>Most popular movies</p>
+
+<div class="popular-movie-list">
+  <div class="popular-movie-card" *ngFor="let movie of popularMovieList">
+    <app-movie [movieData]="movie"></app-movie>
+  </div>
+</div>

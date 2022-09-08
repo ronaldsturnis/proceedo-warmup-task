@@ -5,13 +5,13 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class PopularMoviesService {
+export class TopRatedMoviesService {
   constructor(private http: HttpClient) {}
 
-  getPopularMovies() {
+  getTopRatedMovies() {
     let params = new HttpParams().set('api_key', environment.apiKey);
 
-    return this.http.get<any>(`${environment.apiURL}/movie/popular`, {
+    return this.http.get<any>(`${environment.apiURL}/movie/top_rated`, {
       params: params,
     });
   }
