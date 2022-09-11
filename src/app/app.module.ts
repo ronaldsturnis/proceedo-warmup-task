@@ -6,6 +6,7 @@ import { PopularMoviesComponent } from './src/components/popular-movies/popular-
 import { HttpClientModule } from '@angular/common/http';
 import { MovieComponent } from './src/components/movie/movie.component';
 import { TopRatedMoviesComponent } from './src/components/top-rated/top-rated-movies.component';
+import { SearchMovieComponent } from './src/components/search-movie/search-movie.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { TopRatedMoviesComponent } from './src/components/top-rated/top-rated-mo
     PopularMoviesComponent,
     MovieComponent,
     TopRatedMoviesComponent,
+    SearchMovieComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
