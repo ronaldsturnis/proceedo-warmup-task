@@ -4,6 +4,6 @@
       movieData.poster_path
     }}"
   />
-  <h4>{{ movieData.title }}</h4>
-  <h6>{{ movieData.release_date }}</h6>
+  <h4 class="movie-title">{{ movieData.title }}</h4>
+  <h6>{{ movieData.release_date | date: 'YYYY' }}</h6>
 </div>

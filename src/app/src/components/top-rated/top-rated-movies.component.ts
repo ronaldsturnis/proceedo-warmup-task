@@ -3,7 +3,7 @@ import { IMovie } from '../../interfaces/IMovie';
 import { TopRatedMoviesService } from '../../services/top-rated-movies.service';
 
 @Component({
-  selector: 'app-favourite-movies',
+  selector: 'app-top-rated-movies',
   templateUrl: './top-rated-movies.component.html',
   styleUrls: ['./top-rated-movies.component.less'],
 })
