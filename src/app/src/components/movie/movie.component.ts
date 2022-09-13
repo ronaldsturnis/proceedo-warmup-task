@@ -8,7 +8,6 @@ import { IMovie } from 'src/app/src/interfaces/IMovie';
 })
 export class MovieComponent implements OnInit {
   @Input() movieData!: IMovie;
-  movieCardImage!: string;
 
   constructor() {}
 
