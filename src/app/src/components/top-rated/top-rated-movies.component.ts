@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { IMovie } from '../../interfaces/IMovie';
+import { IMoviePage } from '../../interfaces/IMoviePage';
 import { TopRatedMoviesService } from '../../services/top-rated-movies.service';
 
 @Component({
@@ -8,13 +10,11 @@ import { TopRatedMoviesService } from '../../services/top-rated-movies.service';
   styleUrls: ['./top-rated-movies.component.less'],
 })
 export class TopRatedMoviesComponent implements OnInit {
-  topRatedMovieList = new Array<IMovie>();
+  topRatedMovieList$ = new Observable<IMoviePage>();
 
   constructor(private topRatedMoviesService: TopRatedMoviesService) {}
 
   ngOnInit(): void {
-    this.topRatedMoviesService.getTopRatedMovies().subscribe((response) => {
-      this.topRatedMovieList = response.results;
-    });
+    this.topRatedMovieList$ = this.topRatedMoviesService.getTopRatedMovies();
   }
 }

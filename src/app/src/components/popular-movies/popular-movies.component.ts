@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { IMovie } from 'src/app/src/interfaces/IMovie';
+import { IMoviePage } from '../../interfaces/IMoviePage';
 import { PopularMoviesService } from '../../services/popular-movies.service';
 
 @Component({
@@ -8,13 +10,11 @@ import { PopularMoviesService } from '../../services/popular-movies.service';
   styleUrls: ['./popular-movies.component.less'],
 })
 export class PopularMoviesComponent implements OnInit {
-  popularMovieList = new Array<IMovie>();
+  popularMovieList$ = new Observable<IMoviePage>();
 
   constructor(private popularMoviesService: PopularMoviesService) {}
 
   ngOnInit(): void {
-    this.popularMoviesService.getPopularMovies().subscribe((response) => {
-      this.popularMovieList = response.results;
-    });
+    this.popularMovieList$ = this.popularMoviesService.getPopularMovies();
   }
 }
