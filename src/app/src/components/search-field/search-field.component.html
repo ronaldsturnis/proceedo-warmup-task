@@ -7,8 +7,17 @@
       type="search"
       placeholder="Search movies..."
       aria-label="searchBlock"
+      [(ngModel)]="searchQuery"
     />
-    <button class="btn search-icon" type="submit" tabindex="-1">Search</button>
+    <button
+      class="btn search-icon"
+      type="submit"
+      tabindex="-1"
+      [routerLink]="['search-results']"
+      [queryParams]="{ query: searchQuery }"
+    >
+      Search
+    </button>
     <span class="clear-search">Clear</span>
   </div>
 </div>
