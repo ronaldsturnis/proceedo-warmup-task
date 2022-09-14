@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IMoviePage } from '../interfaces/IMoviePage';
+import { IMoviePage } from '../models/IMoviePage.model';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ import { IMoviePage } from '../interfaces/IMoviePage';
 export class TopRatedMoviesService {
   constructor(private http: HttpClient) {}
 
-  getTopRatedMovies() {
+  getTopRatedMovies(): Observable<IMoviePage> {
     let params = new HttpParams().set('api_key', environment.apiKey);
 
     return this.http.get<IMoviePage>(`${environment.apiURL}/movie/top_rated`, {

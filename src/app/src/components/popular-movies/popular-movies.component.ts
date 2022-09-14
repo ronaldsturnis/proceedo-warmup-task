@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IMovie } from 'src/app/src/interfaces/IMovie';
-import { IMoviePage } from '../../interfaces/IMoviePage';
+import { IMovie } from 'src/app/src/models/IMovie.model';
+import { IMoviePage } from '../../models/IMoviePage.model';
 import { PopularMoviesService } from '../../services/popular-movies.service';
 
 @Component({
