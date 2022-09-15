@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { paths } from 'src/app/paths.const';
 
 @Component({
   selector: 'app-search-field',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchFieldComponent implements OnInit {
   searchQuery!: string;
+  searchResultsPath!: string;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.searchResultsPath = paths.searchResultsPath;
+  }
 }

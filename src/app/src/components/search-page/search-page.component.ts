@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { IMoviePage } from '../../models/IMoviePage.model';
 import { SearchMoviesService } from '../../services/search-movies.service';
 
@@ -18,10 +18,10 @@ export class SearchPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe((result) => {
-      this.searchResults$ = this.searchMoviesService.getSearchResults(
-        result['query']
-      );
-    });
+    this.searchResults$ = this.activatedRoute.queryParams.pipe(
+      switchMap((params) =>
+        this.searchMoviesService.getSearchResults(params['query'])
+      )
+    );
   }
 }
