@@ -1,0 +1,23 @@
+<div class="search">
+  <div class="form-group search-group search-group-primary search-group-button">
+    <label for="form_control_ex4" class="sr-only">Search</label>
+    <input
+      id="form_control_ex4"
+      class="form-control"
+      type="search"
+      placeholder="Search movies..."
+      aria-label="searchBlock"
+      [(ngModel)]="searchQuery"
+    />
+    <button
+      class="btn search-icon"
+      type="submit"
+      tabindex="-1"
+      [routerLink]="searchResultsPath"
+      [queryParams]="{ query: searchQuery }"
+    >
+      Search
+    </button>
+    <span class="clear-search">Clear</span>
+  </div>
+</div>

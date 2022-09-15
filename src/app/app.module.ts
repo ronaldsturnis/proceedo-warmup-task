@@ -6,6 +6,9 @@ import { PopularMoviesComponent } from './src/components/popular-movies/popular-
 import { HttpClientModule } from '@angular/common/http';
 import { MovieComponent } from './src/components/movie/movie.component';
 import { TopRatedMoviesComponent } from './src/components/top-rated/top-rated-movies.component';
+import { SearchFieldComponent } from './src/components/search-field/search-field.component';
+import { SearchPageComponent } from './src/components/search-page/search-page.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,8 +16,10 @@ import { TopRatedMoviesComponent } from './src/components/top-rated/top-rated-mo
     PopularMoviesComponent,
     MovieComponent,
     TopRatedMoviesComponent,
+    SearchFieldComponent,
+    SearchPageComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

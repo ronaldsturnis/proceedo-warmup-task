@@ -1,0 +1,8 @@
+<div class="search-movies-title">
+  <h2><b>Search results</b></h2>
+</div>
+<div *ngIf="searchResults$ | async as searchResults" class="search-movies-list">
+  <div class="search-movies-card" *ngFor="let movie of searchResults.results">
+    <app-movie [movieData]="movie"></app-movie>
+  </div>
+</div>
