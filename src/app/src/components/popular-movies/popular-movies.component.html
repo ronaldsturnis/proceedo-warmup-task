@@ -9,6 +9,9 @@
     class="popular-movie-card"
     *ngFor="let movie of popularMovieList.results"
   >
-    <app-movie [movieData]="movie"></app-movie>
+    <app-movie
+      [movieData]="movie"
+      (click)="showMovieDetails(movie.id)"
+    ></app-movie>
   </div>
 </div>

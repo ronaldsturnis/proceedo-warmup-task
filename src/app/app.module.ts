@@ -9,6 +9,7 @@ import { TopRatedMoviesComponent } from './src/components/top-rated/top-rated-mo
 import { SearchFieldComponent } from './src/components/search-field/search-field.component';
 import { SearchPageComponent } from './src/components/search-page/search-page.component';
 import { FormsModule } from '@angular/forms';
+import { MovieDetailsComponent } from './src/components/movie-details/movie-details.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FormsModule } from '@angular/forms';
     TopRatedMoviesComponent,
     SearchFieldComponent,
     SearchPageComponent,
+    MovieDetailsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
