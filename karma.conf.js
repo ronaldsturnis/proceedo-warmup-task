@@ -10,35 +10,40 @@ module.exports = function (config) {
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage'),
-      require('@angular-devkit/build-angular/plugins/karma')
+      require('karma-jasmine-seed-reporter'),
+      require('@angular-devkit/build-angular/plugins/karma'),
     ],
     client: {
-      jasmine: {
-        // you can add configuration options for Jasmine here
-        // the possible options are listed at https://jasmine.github.io/api/edge/Configuration.html
-        // for example, you can disable the random execution with `random: false`
-        // or set a specific seed with `seed: 4321`
-      },
-      clearContext: false // leave Jasmine Spec Runner output visible in browser
-    },
-    jasmineHtmlReporter: {
-      suppressAll: true // removes the duplicated traces
+      clearContext: false, // leave Jasmine Spec Runner output visible in browser
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/proceedo-warmup-task'),
-      subdir: '.',
+      dir: require('path').join(__dirname, '../coverage'),
       reporters: [
-        { type: 'html' },
-        { type: 'text-summary' }
-      ]
+        { type: 'html', subdir: '.' },
+        { type: 'lcovonly', subdir: '.' },
+      ],
+      fixWebpackSourcePaths: true,
     },
-    reporters: ['progress', 'kjhtml'],
+    reporters: ['progress', 'kjhtml', 'jasmine-seed'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['ChromeDebugging'],
+    customLaunchers: {
+      CustomChromeHeadless: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox'],
+      },
+      ChromeDebugging: {
+        base: 'Chrome',
+        flags: ['--remote-debugging-port=9333'],
+        debug: true,
+      },
+    },
     singleRun: false,
-    restartOnFileChange: true
+    // try to mitigate failing tests on CI
+    browserNoActivityTimeout: 100000,
+    browserDisconnectTimeout: 10000,
   });
 };

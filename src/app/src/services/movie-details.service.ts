@@ -11,7 +11,7 @@ export class MovieDetailsService {
   constructor(private http: HttpClient) {}
 
   getMovieDetails(movieId: number): Observable<IMovieDetails> {
-    let params = new HttpParams().set('api_key', environment.apiKey);
+    const params = new HttpParams().set('api_key', environment.apiKey);
 
     return this.http.get<IMovieDetails>(`${environment.apiURL}/movie/${movieId}`, { params: params });
   }
