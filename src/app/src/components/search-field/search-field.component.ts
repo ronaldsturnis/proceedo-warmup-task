@@ -8,7 +8,7 @@ import { paths } from 'src/app/paths.const';
 })
 export class SearchFieldComponent implements OnInit {
   searchQuery!: string;
-  searchResultsPath = paths.searchResultsPath;
+  readonly searchResultsPath = paths.searchResultsPath;
 
   constructor() {}
 

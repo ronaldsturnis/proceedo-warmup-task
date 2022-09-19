@@ -8,5 +8,5 @@ import { paths } from './paths.const';
 })
 export class AppComponent {
   title = 'proceedo-warmup-task';
-  routingPaths = paths;
+  readonly routingPaths = paths;
 }
