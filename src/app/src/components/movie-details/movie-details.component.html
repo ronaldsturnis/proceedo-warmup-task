@@ -1,15 +1,15 @@
-<div class="movieCard" *ngIf="movieDetails$ | async as movieDetails">
-  <div class="movieDetailsTitle">
+<div class="movie-card" *ngIf="movieDetails$ | async as movieDetails">
+  <div class="movie-details-title">
     <h2>
       <b>{{ movieDetails.title }}</b>
     </h2>
     <button class="btn btn-primary" (click)="redirectToHomepage()">Back to homepage</button>
   </div>
-  <div class="movieCardDetails">
-    <div class="movieImage">
+  <div class="movie-card-details">
+    <div class="movie-image">
       <img src="https://www.themoviedb.org/t/p/w220_and_h330_face{{ movieDetails.poster_path }}" />
     </div>
-    <div class="movieDetails">
+    <div class="movie-details">
       <h3><b>Release date:</b> {{ movieDetails.release_date | date: 'MMMM d, y' }}</h3>
       <h3>
         <b>Original language:</b>
@@ -29,6 +29,10 @@
       <h3><b>Description:</b> {{ movieDetails.overview }}</h3>
       <h3><b>User rating:</b> {{ movieDetails.vote_average | number: '1.1-1' }}</h3>
       <h3><b>Rating count:</b> {{ movieDetails.vote_count }}</h3>
+
+      <div [ngClass]="{ selected: selectedAsFavourite }">
+        <span class="vismaicon vismaicon-favourite" (click)="markMovieAsFavourite()"> </span>
+      </div>
     </div>
   </div>
 </div>

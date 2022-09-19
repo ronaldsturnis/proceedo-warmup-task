@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { paths } from 'src/app/paths.const';
 import { IMovie } from 'src/app/src/models/IMovie.model';
 
 @Component({
@@ -8,8 +10,17 @@ import { IMovie } from 'src/app/src/models/IMovie.model';
 })
 export class MovieComponent implements OnInit {
   @Input() movieData!: IMovie;
+  selectedAsFavourite = false;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  showMovieDetails(movieId: number): void {
+    this.router.navigate([paths.movieDetailsPath, movieId]);
+  }
+
+  markMovieAsFavourite(): void {
+    this.selectedAsFavourite = !this.selectedAsFavourite;
+  }
 }
