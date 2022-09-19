@@ -1,3 +1,51 @@
-<div *ngIf="movieDetails$ | async as movieDetails">
-  <p>{{ movieDetails.id }}</p>
+<div class="movieCard" *ngIf="movieDetails$ | async as movieDetails">
+  <div class="movieDetailsTitle">
+    <h2>
+      <b>{{ movieDetails.title }}</b>
+    </h2>
+    <button class="btn btn-primary" (click)="redirectToHomepage()">
+      Back to homepage
+    </button>
+  </div>
+  <div class="movieCardDetails">
+    <div class="movieImage">
+      <img
+        src="https://www.themoviedb.org/t/p/w220_and_h330_face{{
+          movieDetails.poster_path
+        }}"
+      />
+    </div>
+    <div class="movieDetails">
+      <h3>
+        <b>Release date:</b> {{ movieDetails.release_date | date: 'MMMM d, y' }}
+      </h3>
+      <h3>
+        <b>Original language:</b>
+        {{ movieDetails.original_language | uppercase }}
+      </h3>
+      <h3>
+        <b>Produced by:</b>
+        <span
+          *ngFor="
+            let company of movieDetails.production_companies;
+            let i = index
+          "
+        >
+          {{ company.name }}
+          <span *ngIf="i !== movieDetails.production_companies.length - 1">
+            ,
+          </span>
+        </span>
+      </h3>
+      <h3>
+        <b>Budget:</b>
+        {{ movieDetails.budget | currency: 'USD':'symbol':'1.0-0' }}
+      </h3>
+      <h3><b>Description:</b> {{ movieDetails.overview }}</h3>
+      <h3>
+        <b>User rating:</b> {{ movieDetails.vote_average | number: '1.1-1' }}
+      </h3>
+      <h3><b>Rating count:</b> {{ movieDetails.vote_count }}</h3>
+    </div>
+  </div>
 </div>

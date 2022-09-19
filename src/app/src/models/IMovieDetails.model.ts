@@ -1,9 +1,9 @@
 export interface IMovieDetails {
   adult: boolean;
   backdrop_path?: string;
-  belongs_to_collection?: object;
+  belongs_to_collection?: any;
   budget: number;
-  genres: Array<object>;
+  genres: Array<any>;
   homepage?: string;
   id: number;
   imdb_id?: string;
@@ -12,12 +12,12 @@ export interface IMovieDetails {
   overview?: string;
   popularity: number;
   poster_path?: string;
-  production_companies: Array<object>;
-  production_countries: Array<object>;
+  production_companies: Array<any>;
+  production_countries: Array<any>;
   release_date: string;
   revenue: number;
   runtime?: number;
-  spoken_languages: Array<object>;
+  spoken_languages: Array<any>;
   status: string;
   tagline?: string;
   title: string;
