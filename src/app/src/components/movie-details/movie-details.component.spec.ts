@@ -2,32 +2,32 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { SearchMoviesService } from '../../services/search-movies.service';
+import { MovieDetailsService } from '../../services/movie-details.service';
 
-import { SearchPageComponent } from './search-page.component';
+import { MovieDetailsComponent } from './movie-details.component';
 
-describe('SearchPageComponent', () => {
-  let component: SearchPageComponent;
-  let fixture: ComponentFixture<SearchPageComponent>;
-
+describe('MovieDetailsComponent', () => {
   const fakeActivatedRoute = {
     snapshot: { data: {} },
   } as ActivatedRoute;
+
+  let component: MovieDetailsComponent;
+  let fixture: ComponentFixture<MovieDetailsComponent>;
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, RouterTestingModule],
       providers: [
-        SearchMoviesService,
+        MovieDetailsService,
         HttpClient,
         { provide: ActivatedRoute, useValue: fakeActivatedRoute },
       ],
-      declarations: [SearchPageComponent],
+      declarations: [MovieDetailsComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SearchPageComponent);
+    fixture = TestBed.createComponent(MovieDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

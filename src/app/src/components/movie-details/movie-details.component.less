@@ -1,0 +1,56 @@
+.movieDetailsTitle {
+    margin-bottom: 20px;
+    
+}
+
+.movieDetailsTitle > h2 {
+    display: inline-block;
+}
+
+.btn {
+    width: 150px;
+    float: right;
+}
+
+img {
+    border: 0;
+    border-radius: 20px;
+    max-width: 220px;
+    max-height: 330px;
+}
+
+.movieCardDetails {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 40px;
+}
+
+.movieDetails {
+    padding-left: 40px;
+}
+
+.movieCard {
+    padding: 20px 40px 0px 40px;
+}
+
+@media (max-width: 630px) {
+    .movieCardDetails {
+        display: flex;
+        flex-direction: column;
+    }
+
+    img {
+        margin-bottom: 40px;
+    }
+
+    .movieDetailsTitle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .movieImage {
+        display: flex;
+        justify-content: center;
+    }
+}

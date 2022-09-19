@@ -11,12 +11,8 @@ export class SearchMoviesService {
   constructor(private http: HttpClient) {}
 
   getSearchResults(searchQuery: string): Observable<IMoviePage> {
-    let params = new HttpParams()
-      .set('api_key', environment.apiKey)
-      .set('query', searchQuery);
+    let params = new HttpParams().set('api_key', environment.apiKey).set('query', searchQuery);
 
-    return this.http.get<IMoviePage>(`${environment.apiURL}/search/movie`, {
-      params: params,
-    });
+    return this.http.get<IMoviePage>(`${environment.apiURL}/search/movie`, { params: params });
   }
 }
