@@ -8,11 +8,9 @@ import { paths } from 'src/app/paths.const';
 })
 export class SearchFieldComponent implements OnInit {
   searchQuery!: string;
-  searchResultsPath!: string;
+  searchResultsPath = paths.searchResultsPath;
 
   constructor() {}
 
-  ngOnInit(): void {
-    this.searchResultsPath = paths.searchResultsPath;
-  }
+  ngOnInit(): void {}
 }

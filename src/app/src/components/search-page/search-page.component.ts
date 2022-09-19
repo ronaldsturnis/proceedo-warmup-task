@@ -11,7 +11,7 @@ import { SearchMoviesService } from '../../services/search-movies.service';
   styleUrls: ['./search-page.component.less'],
 })
 export class SearchPageComponent implements OnInit {
-  searchResults$ = new Observable<IMoviePage>();
+  searchResults$!: Observable<IMoviePage>;
 
   constructor(
     private activatedRoute: ActivatedRoute,

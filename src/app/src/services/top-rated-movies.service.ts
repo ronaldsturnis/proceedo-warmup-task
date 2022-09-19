@@ -13,8 +13,6 @@ export class TopRatedMoviesService {
   getTopRatedMovies(): Observable<IMoviePage> {
     let params = new HttpParams().set('api_key', environment.apiKey);
 
-    return this.http.get<IMoviePage>(`${environment.apiURL}/movie/top_rated`, {
-      params: params,
-    });
+    return this.http.get<IMoviePage>(`${environment.apiURL}/movie/top_rated`, { params: params });
   }
 }

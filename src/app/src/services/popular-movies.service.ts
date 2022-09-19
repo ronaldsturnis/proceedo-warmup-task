@@ -13,8 +13,6 @@ export class PopularMoviesService {
   getPopularMovies(): Observable<IMoviePage> {
     let params = new HttpParams().set('api_key', environment.apiKey);
 
-    return this.http.get<IMoviePage>(`${environment.apiURL}/movie/popular`, {
-      params: params,
-    });
+    return this.http.get<IMoviePage>(`${environment.apiURL}/movie/popular`, { params: params });
   }
 }

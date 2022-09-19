@@ -11,18 +11,15 @@ import { TopRatedMoviesService } from '../../services/top-rated-movies.service';
   styleUrls: ['./top-rated-movies.component.less'],
 })
 export class TopRatedMoviesComponent implements OnInit {
-  topRatedMovieList$ = new Observable<IMoviePage>();
+  topRatedMovieList$!: Observable<IMoviePage>;
 
-  constructor(
-    private topRatedMoviesService: TopRatedMoviesService,
-    private router: Router
-  ) {}
+  constructor(private topRatedMoviesService: TopRatedMoviesService, private router: Router) {}
 
   ngOnInit(): void {
     this.topRatedMovieList$ = this.topRatedMoviesService.getTopRatedMovies();
   }
 
-  showMovieDetails(movieId: any): void {
+  showMovieDetails(movieId: number): void {
     this.router.navigate([paths.movieDetailsPath, movieId]);
   }
 }

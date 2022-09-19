@@ -6,11 +6,7 @@ import { paths } from './paths.const';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'proceedo-warmup-task';
-  routingPaths?: any;
-
-  ngOnInit(): void {
-    this.routingPaths = paths;
-  }
+  routingPaths = paths;
 }

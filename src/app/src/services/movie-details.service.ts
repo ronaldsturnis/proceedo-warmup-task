@@ -13,11 +13,6 @@ export class MovieDetailsService {
   getMovieDetails(movieId: number): Observable<IMovieDetails> {
     let params = new HttpParams().set('api_key', environment.apiKey);
 
-    return this.http.get<IMovieDetails>(
-      `${environment.apiURL}/movie/${movieId}`,
-      {
-        params: params,
-      }
-    );
+    return this.http.get<IMovieDetails>(`${environment.apiURL}/movie/${movieId}`, { params: params });
   }
 }

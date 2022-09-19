@@ -11,7 +11,7 @@ import { MovieDetailsService } from '../../services/movie-details.service';
   styleUrls: ['./movie-details.component.less'],
 })
 export class MovieDetailsComponent implements OnInit {
-  movieDetails$ = new Observable<IMovieDetails>();
+  movieDetails$!: Observable<IMovieDetails>;
 
   constructor(
     private movieDetailsService: MovieDetailsService,

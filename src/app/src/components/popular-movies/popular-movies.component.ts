@@ -11,7 +11,7 @@ import { PopularMoviesService } from '../../services/popular-movies.service';
   styleUrls: ['./popular-movies.component.less'],
 })
 export class PopularMoviesComponent implements OnInit {
-  popularMovieList$ = new Observable<IMoviePage>();
+  popularMovieList$!: Observable<IMoviePage>;
 
   constructor(
     private popularMoviesService: PopularMoviesService,
@@ -22,7 +22,7 @@ export class PopularMoviesComponent implements OnInit {
     this.popularMovieList$ = this.popularMoviesService.getPopularMovies();
   }
 
-  showMovieDetails(movieId: any): void {
+  showMovieDetails(movieId: number): void {
     this.router.navigate([paths.movieDetailsPath, movieId]);
   }
 }
