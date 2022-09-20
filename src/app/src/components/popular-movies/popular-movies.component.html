@@ -1,17 +1,8 @@
 <div class="popular-movies-title">
   <h2><b>Most popular movies</b></h2>
 </div>
-<div
-  *ngIf="popularMovieList$ | async as popularMovieList"
-  class="popular-movie-list"
->
-  <div
-    class="popular-movie-card"
-    *ngFor="let movie of popularMovieList.results"
-  >
-    <app-movie
-      [movieData]="movie"
-      (click)="showMovieDetails(movie.id)"
-    ></app-movie>
+<div *ngIf="popularMovieList$ | async as popularMovieList" class="popular-movie-list">
+  <div class="popular-movie-card" *ngFor="let movie of popularMovieList.results">
+    <app-movie [movieData]="movie"></app-movie>
   </div>
 </div>

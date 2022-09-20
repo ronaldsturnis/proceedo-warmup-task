@@ -1,9 +1,8 @@
-<div>
-  <img
-    src="https://www.themoviedb.org/t/p/w220_and_h330_face{{
-      movieData.poster_path
-    }}"
-  />
+<div class="movie-card" (click)="showMovieDetails(movieData.id)">
+  <img src="https://www.themoviedb.org/t/p/w220_and_h330_face{{ movieData.poster_path }}" />
   <h4 class="movie-title">{{ movieData.title }}</h4>
   <h6>{{ movieData.release_date | date: 'YYYY' }}</h6>
+</div>
+<div [ngClass]="{ selected: selectedAsFavourite }">
+  <span class="vismaicon vismaicon-favourite" (click)="markMovieAsFavourite()"> </span>
 </div>

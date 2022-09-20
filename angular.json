@@ -116,8 +116,7 @@
       }
     }
   },
-  "defaultProject": "proceedo-warmup-task",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "analytics": false
   }
 }

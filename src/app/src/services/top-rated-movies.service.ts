@@ -11,7 +11,7 @@ export class TopRatedMoviesService {
   constructor(private http: HttpClient) {}
 
   getTopRatedMovies(): Observable<IMoviePage> {
-    let params = new HttpParams().set('api_key', environment.apiKey);
+    const params = new HttpParams().set('api_key', environment.apiKey);
 
     return this.http.get<IMoviePage>(`${environment.apiURL}/movie/top_rated`, { params: params });
   }

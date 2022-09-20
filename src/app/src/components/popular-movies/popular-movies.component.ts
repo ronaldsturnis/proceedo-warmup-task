@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { paths } from 'src/app/paths.const';
 import { IMoviePage } from '../../models/IMoviePage.model';
 import { PopularMoviesService } from '../../services/popular-movies.service';
 
@@ -13,16 +11,9 @@ import { PopularMoviesService } from '../../services/popular-movies.service';
 export class PopularMoviesComponent implements OnInit {
   popularMovieList$!: Observable<IMoviePage>;
 
-  constructor(
-    private popularMoviesService: PopularMoviesService,
-    private router: Router
-  ) {}
+  constructor(private popularMoviesService: PopularMoviesService) {}
 
   ngOnInit(): void {
     this.popularMovieList$ = this.popularMoviesService.getPopularMovies();
-  }
-
-  showMovieDetails(movieId: number): void {
-    this.router.navigate([paths.movieDetailsPath, movieId]);
   }
 }

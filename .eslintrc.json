@@ -37,7 +37,7 @@
             "allowTernary": true
           }
         ],
-        "comma-dangle": "error",
+        "comma-dangle": 0,
         "id-blacklist": "off",
         "id-match": "off",
         "no-underscore-dangle": "off",
@@ -250,7 +250,6 @@
           "error",
           {
             "type": "element",
-            "prefix": "pr-admin",
             "style": "kebab-case"
           }
         ],

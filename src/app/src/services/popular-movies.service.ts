@@ -11,7 +11,7 @@ export class PopularMoviesService {
   constructor(private http: HttpClient) {}
 
   getPopularMovies(): Observable<IMoviePage> {
-    let params = new HttpParams().set('api_key', environment.apiKey);
+    const params = new HttpParams().set('api_key', environment.apiKey);
 
     return this.http.get<IMoviePage>(`${environment.apiURL}/movie/popular`, { params: params });
   }

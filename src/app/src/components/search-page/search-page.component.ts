@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
-import { paths } from 'src/app/paths.const';
 import { IMoviePage } from '../../models/IMoviePage.model';
 import { SearchMoviesService } from '../../services/search-movies.service';
 
@@ -13,21 +12,11 @@ import { SearchMoviesService } from '../../services/search-movies.service';
 export class SearchPageComponent implements OnInit {
   searchResults$!: Observable<IMoviePage>;
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private searchMoviesService: SearchMoviesService,
-    private router: Router
-  ) {}
+  constructor(private activatedRoute: ActivatedRoute, private searchMoviesService: SearchMoviesService) {}
 
   ngOnInit(): void {
     this.searchResults$ = this.activatedRoute.queryParams.pipe(
-      switchMap((params) =>
-        this.searchMoviesService.getSearchResults(params['query'])
-      )
+      switchMap((params) => this.searchMoviesService.getSearchResults(params['query'])),
     );
-  }
-
-  showMovieDetails(movieId: any): void {
-    this.router.navigate([paths.movieDetailsPath, movieId]);
   }
 }
