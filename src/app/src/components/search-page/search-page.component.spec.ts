@@ -1,36 +1,39 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
+import { TestBed } from '@angular/core/testing';
+import { cold } from 'jasmine-marbles';
 import { SearchMoviesService } from '../../services/search-movies.service';
-
 import { SearchPageComponent } from './search-page.component';
+import { provideMockService } from '../../services/mock-service-provider';
+import { ActivatedRoute } from '@angular/router';
+import { IMoviePage } from '../../models/IMoviePage.model';
+import { of } from 'rxjs';
 
 describe('SearchPageComponent', () => {
   let component: SearchPageComponent;
-  let fixture: ComponentFixture<SearchPageComponent>;
-
-  const fakeActivatedRoute = {
-    snapshot: { data: {} },
-  } as ActivatedRoute;
+  let searchMoviesService: jasmine.SpyObj<SearchMoviesService>;
+  const mockSearchResults = {} as IMoviePage;
 
   beforeEach(async () => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientModule, RouterTestingModule],
-      providers: [SearchMoviesService, HttpClient, { provide: ActivatedRoute, useValue: fakeActivatedRoute }],
+    await TestBed.configureTestingModule({
       declarations: [SearchPageComponent],
-    }).compileComponents();
+      providers: [provideMockService(SearchMoviesService), { provide: ActivatedRoute, useValue: { queryParams: of({ query: '0' }) } }],
+    })
+      .overrideTemplate(SearchPageComponent, '')
+      .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SearchPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    searchMoviesService = TestBed.inject(SearchMoviesService) as jasmine.SpyObj<SearchMoviesService>;
+    searchMoviesService.getSearchResults.and.returnValue(of(mockSearchResults));
+    component = TestBed.createComponent(SearchPageComponent).componentInstance;
   });
 
-  it('should create', () => {
-    component.ngOnInit();
-
-    expect(component).toBeTruthy();
+  describe('ngOnInit', () => {
+    describe('searchResults$', () => {
+      it('should call service to get movies in search page', () => {
+        component.ngOnInit();
+        expect(component.searchResults$).toBeObservable(cold('(0|)', [mockSearchResults]));
+        expect(searchMoviesService.getSearchResults).toHaveBeenCalled();
+      });
+    });
   });
 });

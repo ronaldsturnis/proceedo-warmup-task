@@ -1,21 +1,26 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { MovieComponent } from './movie.component';
 
 describe('MovieComponent', () => {
   let component: MovieComponent;
   let fixture: ComponentFixture<MovieComponent>;
+  let router: jasmine.SpyObj<Router>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
       declarations: [MovieComponent],
-    }).compileComponents();
+    })
+      .overrideTemplate(MovieComponent, '')
+      .compileComponents();
   });
 
   beforeEach(() => {
+    router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
     fixture = TestBed.createComponent(MovieComponent);
     component = fixture.componentInstance;
-    component.ngOnInit();
   });
 
   it('should create', () => {
@@ -35,10 +40,9 @@ describe('MovieComponent', () => {
     expect(component.selectedAsFavourite).toBe(false);
   });
 
-  it('should redirect when clicked'),
-    () => {
-      component.showMovieDetails(0);
-
-      expect(component).toBeFalsy();
-    };
+  it('should redirect when clicked', () => {
+    spyOn(component, 'showMovieDetails');
+    component.showMovieDetails(0);
+    expect(component.showMovieDetails).toHaveBeenCalled();
+  });
 });

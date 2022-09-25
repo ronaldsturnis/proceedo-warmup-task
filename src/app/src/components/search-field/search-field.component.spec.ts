@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SearchFieldComponent } from './search-field.component';
 
 describe('SearchMovieComponent', () => {
@@ -19,8 +18,6 @@ describe('SearchMovieComponent', () => {
   });
 
   it('should create', () => {
-    component.ngOnInit();
-
     expect(component).toBeTruthy();
   });
 });

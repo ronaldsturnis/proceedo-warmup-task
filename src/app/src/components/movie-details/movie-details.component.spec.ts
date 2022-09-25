@@ -1,37 +1,44 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
+import { TestBed } from '@angular/core/testing';
+import { cold } from 'jasmine-marbles';
 import { MovieDetailsService } from '../../services/movie-details.service';
-
+import { provideMockService } from '../../services/mock-service-provider';
 import { MovieDetailsComponent } from './movie-details.component';
+import { ActivatedRoute } from '@angular/router';
+import { IMovieDetails } from '../../models/IMovieDetails.model';
+import { of } from 'rxjs';
 
 describe('MovieDetailsComponent', () => {
+  let component: MovieDetailsComponent;
+  let movieDetailsService: jasmine.SpyObj<MovieDetailsService>;
+
+  const mockMovieDetails = {} as IMovieDetails;
   const fakeActivatedRoute = {
     snapshot: { data: {} },
   } as ActivatedRoute;
 
-  let component: MovieDetailsComponent;
-  let fixture: ComponentFixture<MovieDetailsComponent>;
-
   beforeEach(async () => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientModule, RouterTestingModule],
-      providers: [MovieDetailsService, HttpClient, { provide: ActivatedRoute, useValue: fakeActivatedRoute }],
+    await TestBed.configureTestingModule({
       declarations: [MovieDetailsComponent],
-    }).compileComponents();
+      providers: [provideMockService(MovieDetailsService), { provide: ActivatedRoute, useValue: fakeActivatedRoute }],
+    })
+      .overrideTemplate(MovieDetailsComponent, '')
+      .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MovieDetailsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    movieDetailsService = TestBed.inject(MovieDetailsService) as jasmine.SpyObj<MovieDetailsService>;
+    movieDetailsService.getMovieDetails.and.returnValue(of(mockMovieDetails));
+    component = TestBed.createComponent(MovieDetailsComponent).componentInstance;
   });
 
-  it('should create', () => {
-    component.ngOnInit();
-
-    expect(component).toBeTruthy();
+  describe('ngOnInit', () => {
+    describe('searchResults$', () => {
+      it('should call service to get movie details', () => {
+        component.ngOnInit();
+        expect(component.movieDetails$).toBeObservable(cold('(0|)', [mockMovieDetails]));
+        expect(movieDetailsService.getMovieDetails).toHaveBeenCalled();
+      });
+    });
   });
 
   it('favourite button should be enabled when clicked', () => {
@@ -47,10 +54,9 @@ describe('MovieDetailsComponent', () => {
     expect(component.selectedAsFavourite).toBe(false);
   });
 
-  it('should redirect when homepage button clicked'),
-    () => {
-      component.redirectToHomepage();
-
-      expect(component).toBeFalsy();
-    };
+  it('should redirect when homepage button clicked', () => {
+    spyOn(component, 'redirectToHomepage');
+    component.redirectToHomepage();
+    expect(component.redirectToHomepage).toHaveBeenCalled();
+  });
 });

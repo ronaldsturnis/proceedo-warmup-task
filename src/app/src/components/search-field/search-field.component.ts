@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { paths } from 'src/app/paths.const';
 
 @Component({
@@ -6,11 +6,9 @@ import { paths } from 'src/app/paths.const';
   templateUrl: './search-field.component.html',
   styleUrls: ['./search-field.component.less'],
 })
-export class SearchFieldComponent implements OnInit {
+export class SearchFieldComponent {
   searchQuery!: string;
   readonly searchResultsPath = paths.searchResultsPath;
 
   constructor() {}
-
-  ngOnInit(): void {}
 }
