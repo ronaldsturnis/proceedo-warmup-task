@@ -17,7 +17,9 @@ describe('SearchMovieComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  describe('ngOnInit', () => {
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
   });
 });

@@ -3,29 +3,31 @@ import { cold } from 'jasmine-marbles';
 import { MovieDetailsService } from '../../services/movie-details.service';
 import { provideMockService } from '../../services/mock-service-provider';
 import { MovieDetailsComponent } from './movie-details.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IMovieDetails } from '../../models/IMovieDetails.model';
 import { of } from 'rxjs';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('MovieDetailsComponent', () => {
   let component: MovieDetailsComponent;
   let movieDetailsService: jasmine.SpyObj<MovieDetailsService>;
-
+  let router: jasmine.SpyObj<Router>;
+  let activatedRoute: ActivatedRoute;
   const mockMovieDetails = {} as IMovieDetails;
-  const fakeActivatedRoute = {
-    snapshot: { data: {} },
-  } as ActivatedRoute;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [MovieDetailsComponent],
-      providers: [provideMockService(MovieDetailsService), { provide: ActivatedRoute, useValue: fakeActivatedRoute }],
+      providers: [provideMockService(MovieDetailsService), { provide: ActivatedRoute, useValue: { queryParams: of({ movieId: '424' }) } }],
+      imports: [RouterTestingModule],
     })
       .overrideTemplate(MovieDetailsComponent, '')
       .compileComponents();
   });
 
   beforeEach(() => {
+    router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
+    activatedRoute = TestBed.inject(ActivatedRoute);
     movieDetailsService = TestBed.inject(MovieDetailsService) as jasmine.SpyObj<MovieDetailsService>;
     movieDetailsService.getMovieDetails.and.returnValue(of(mockMovieDetails));
     component = TestBed.createComponent(MovieDetailsComponent).componentInstance;
@@ -35,28 +37,30 @@ describe('MovieDetailsComponent', () => {
     describe('searchResults$', () => {
       it('should call service to get movie details', () => {
         component.ngOnInit();
+        // serviceSpy.movieDetails$.and.returnValue(of([mockMovieDetails]));
         expect(component.movieDetails$).toBeObservable(cold('(0|)', [mockMovieDetails]));
         expect(movieDetailsService.getMovieDetails).toHaveBeenCalled();
       });
     });
   });
 
-  it('favourite button should be enabled when clicked', () => {
-    component.markMovieAsFavourite();
-
-    expect(component.selectedAsFavourite).toBe(true);
+  describe('selectedAsFavourite', () => {
+    it('favourite button should switch values when clicked', () => {
+      component.markMovieAsFavourite();
+      expect(component.selectedAsFavourite).toBe(true);
+      component.markMovieAsFavourite();
+      expect(component.selectedAsFavourite).toBe(false);
+    });
   });
 
-  it('favourite button should be disabled when clicked while enabled', () => {
-    component.markMovieAsFavourite();
-    component.markMovieAsFavourite();
+  describe('redirectToHomepage', () => {
+    it('should redirect when homepage button clicked', () => {
+      const resultUrl = 'top-rated';
 
-    expect(component.selectedAsFavourite).toBe(false);
-  });
+      spyOn(router, 'navigate');
+      component.redirectToHomepage();
 
-  it('should redirect when homepage button clicked', () => {
-    spyOn(component, 'redirectToHomepage');
-    component.redirectToHomepage();
-    expect(component.redirectToHomepage).toHaveBeenCalled();
+      expect(router.navigate).toHaveBeenCalledWith([resultUrl]);
+    });
   });
 });

@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: paths.popularMoviesPath, component: PopularMoviesComponent },
   { path: paths.searchResultsPath, component: SearchPageComponent },
   {
-    path: `${paths.movieDetailsPath}/:movieId`,
+    path: paths.movieDetailsPath,
     component: MovieDetailsComponent,
   },
 ];

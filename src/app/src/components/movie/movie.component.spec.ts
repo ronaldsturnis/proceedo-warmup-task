@@ -27,22 +27,20 @@ describe('MovieComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('favourite button should be enabled when clicked', () => {
+  it('favourite button should switch values when clicked', () => {
     component.markMovieAsFavourite();
-
     expect(component.selectedAsFavourite).toBe(true);
-  });
-
-  it('favourite button should be disabled when clicked while enabled', () => {
     component.markMovieAsFavourite();
-    component.markMovieAsFavourite();
-
     expect(component.selectedAsFavourite).toBe(false);
   });
 
   it('should redirect when clicked', () => {
-    spyOn(component, 'showMovieDetails');
-    component.showMovieDetails(0);
-    expect(component.showMovieDetails).toHaveBeenCalled();
+    const resultUrl = 'movie';
+    const movieId = 424;
+
+    spyOn(router, 'navigate');
+    component.showMovieDetails(movieId);
+
+    expect(router.navigate).toHaveBeenCalledWith([resultUrl], Object({ queryParams: Object({ movieId: movieId }) }));
   });
 });

@@ -15,7 +15,7 @@ export class MovieComponent {
   constructor(public router: Router) {}
 
   showMovieDetails(movieId: number): void {
-    this.router.navigate([paths.movieDetailsPath, movieId]);
+    this.router.navigate([paths.movieDetailsPath], { queryParams: { movieId: movieId } });
   }
 
   markMovieAsFavourite(): void {

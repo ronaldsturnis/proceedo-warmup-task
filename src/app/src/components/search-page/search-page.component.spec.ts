@@ -10,18 +10,20 @@ import { of } from 'rxjs';
 describe('SearchPageComponent', () => {
   let component: SearchPageComponent;
   let searchMoviesService: jasmine.SpyObj<SearchMoviesService>;
+  let activatedRoute: ActivatedRoute;
   const mockSearchResults = {} as IMoviePage;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SearchPageComponent],
-      providers: [provideMockService(SearchMoviesService), { provide: ActivatedRoute, useValue: { queryParams: of({ query: '0' }) } }],
+      providers: [provideMockService(SearchMoviesService), { provide: ActivatedRoute, useValue: { queryParams: of({ query: 'fall' }) } }],
     })
       .overrideTemplate(SearchPageComponent, '')
       .compileComponents();
   });
 
   beforeEach(() => {
+    activatedRoute = TestBed.inject(ActivatedRoute);
     searchMoviesService = TestBed.inject(SearchMoviesService) as jasmine.SpyObj<SearchMoviesService>;
     searchMoviesService.getSearchResults.and.returnValue(of(mockSearchResults));
     component = TestBed.createComponent(SearchPageComponent).componentInstance;
