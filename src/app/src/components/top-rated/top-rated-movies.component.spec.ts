@@ -1,29 +1,38 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { TopRatedMoviesService } from '../../services/top-rated-movies.service';
-
+import { TestBed } from '@angular/core/testing';
+import { cold } from 'jasmine-marbles';
 import { TopRatedMoviesComponent } from './top-rated-movies.component';
+import { provideMockService } from '../../services/mock-service-provider';
+import { TopRatedMoviesService } from '../../services/top-rated-movies.service';
+import { IMoviePage } from '../../models/IMoviePage.model';
+import { of } from 'rxjs';
 
 describe('TopRatedMoviesComponent', () => {
   let component: TopRatedMoviesComponent;
-  let fixture: ComponentFixture<TopRatedMoviesComponent>;
+  let topRatedMoviesService: jasmine.SpyObj<TopRatedMoviesService>;
+  const mockTopRatedMovies = {} as IMoviePage;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule, RouterTestingModule],
-      providers: [TopRatedMoviesService, HttpClient],
       declarations: [TopRatedMoviesComponent],
-    }).compileComponents();
+      providers: [provideMockService(TopRatedMoviesService)],
+    })
+      .overrideTemplate(TopRatedMoviesComponent, '')
+      .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TopRatedMoviesComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    topRatedMoviesService = TestBed.inject(TopRatedMoviesService) as jasmine.SpyObj<TopRatedMoviesService>;
+    topRatedMoviesService.getTopRatedMovies.and.returnValue(of(mockTopRatedMovies));
+    component = TestBed.createComponent(TopRatedMoviesComponent).componentInstance;
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  describe('ngOnInit', () => {
+    describe('topRatedMovieList$', () => {
+      it('should call service to get top rated movies', () => {
+        component.ngOnInit();
+        expect(component.topRatedMovieList$).toBeObservable(cold('(0|)', [mockTopRatedMovies]));
+        expect(topRatedMoviesService.getTopRatedMovies).toHaveBeenCalled();
+      });
+    });
   });
 });

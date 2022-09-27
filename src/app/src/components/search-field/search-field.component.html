@@ -9,9 +9,7 @@
       aria-label="searchBlock"
       [(ngModel)]="searchQuery"
     />
-    <button class="btn search-icon" type="submit" tabindex="-1" [routerLink]="searchResultsPath" [queryParams]="{ query: searchQuery }">
-      Search
-    </button>
+    <button class="btn search-icon" type="submit" tabindex="-1" (click)="redirectToSearchResults(searchQuery)">Search</button>
     <span class="clear-search"></span>
   </div>
 </div>

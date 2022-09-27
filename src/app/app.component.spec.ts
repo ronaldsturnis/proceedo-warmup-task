@@ -7,7 +7,9 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [AppComponent],
-    }).compileComponents();
+    })
+      .overrideTemplate(AppComponent, '')
+      .compileComponents();
   });
 
   it('should create the app', () => {
