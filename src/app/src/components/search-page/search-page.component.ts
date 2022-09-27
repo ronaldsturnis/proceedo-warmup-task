@@ -16,7 +16,7 @@ export class SearchPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchResults$ = this.activatedRoute.queryParams.pipe(
-      switchMap((params) => this.searchMoviesService.getSearchResults(params['query'])),
+      switchMap((params) => this.searchMoviesService.getSearchResults(params['searchQuery'])),
     );
   }
 }

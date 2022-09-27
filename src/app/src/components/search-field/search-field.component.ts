@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { paths } from 'src/app/paths.const';
 
 @Component({
@@ -8,7 +9,12 @@ import { paths } from 'src/app/paths.const';
 })
 export class SearchFieldComponent {
   searchQuery!: string;
-  readonly searchResultsPath = paths.searchResultsPath;
 
-  constructor() {}
+  constructor(private router: Router) {}
+
+  redirectToSearchResults(searchQuery: string): void {
+    if (searchQuery !== '') {
+      this.router.navigate([paths.searchResultsPath], { queryParams: { searchQuery: searchQuery } });
+    }
+  }
 }

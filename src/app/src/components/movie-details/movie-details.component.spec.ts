@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IMovieDetails } from '../../models/IMovieDetails.model';
 import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
+import { paths } from 'src/app/paths.const';
 
 describe('MovieDetailsComponent', () => {
   let component: MovieDetailsComponent;
@@ -55,7 +56,7 @@ describe('MovieDetailsComponent', () => {
 
   describe('redirectToHomepage', () => {
     it('should redirect when homepage button clicked', () => {
-      const resultUrl = 'top-rated';
+      const resultUrl = paths.topRatedMoviesPath;
 
       spyOn(router, 'navigate');
       component.redirectToHomepage();
