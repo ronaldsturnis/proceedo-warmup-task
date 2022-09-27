@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, switchMap } from 'rxjs';
+import { filter, Observable, switchMap } from 'rxjs';
 import { IMoviePage } from '../../models/IMoviePage.model';
 import { SearchMoviesService } from '../../services/search-movies.service';
 
@@ -15,12 +15,9 @@ export class SearchPageComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private searchMoviesService: SearchMoviesService) {}
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe((params) => {
-      if (params['searchQuery'] !== '' && params['searchQuery'] !== undefined) {
-        this.searchResults$ = this.searchMoviesService.getSearchResults(params['searchQuery']);
-      } else {
-        this.searchResults$ = new Observable<IMoviePage>();
-      }
-    });
+    this.searchResults$ = this.activatedRoute.queryParams.pipe(
+      filter((params) => params['searchQuery']),
+      switchMap((params) => this.searchMoviesService.getSearchResults(params['searchQuery'])),
+    );
   }
 }

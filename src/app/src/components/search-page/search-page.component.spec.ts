@@ -16,7 +16,10 @@ describe('SearchPageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SearchPageComponent],
-      providers: [provideMockService(SearchMoviesService), { provide: ActivatedRoute, useValue: { queryParams: of({ query: 'fall' }) } }],
+      providers: [
+        provideMockService(SearchMoviesService),
+        { provide: ActivatedRoute, useValue: { queryParams: of({ searchQuery: 'fall' }) } },
+      ],
     })
       .overrideTemplate(SearchPageComponent, '')
       .compileComponents();
