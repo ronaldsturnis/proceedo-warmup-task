@@ -15,8 +15,12 @@ export class SearchPageComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private searchMoviesService: SearchMoviesService) {}
 
   ngOnInit(): void {
-    this.searchResults$ = this.activatedRoute.queryParams.pipe(
-      switchMap((params) => this.searchMoviesService.getSearchResults(params['searchQuery'])),
-    );
+    this.activatedRoute.queryParams.subscribe((params) => {
+      if (params['searchQuery'] !== '' && params['searchQuery'] !== undefined) {
+        this.searchResults$ = this.searchMoviesService.getSearchResults(params['searchQuery']);
+      } else {
+        this.searchResults$ = new Observable<IMoviePage>();
+      }
+    });
   }
 }

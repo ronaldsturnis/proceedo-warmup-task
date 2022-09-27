@@ -13,8 +13,6 @@ export class SearchFieldComponent {
   constructor(private router: Router) {}
 
   redirectToSearchResults(searchQuery: string): void {
-    if (searchQuery !== '') {
-      this.router.navigate([paths.searchResultsPath], { queryParams: { searchQuery: searchQuery } });
-    }
+    this.router.navigate([paths.searchResultsPath], { queryParams: { searchQuery: searchQuery } });
   }
 }
